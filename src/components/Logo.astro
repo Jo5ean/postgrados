@@ -1,0 +1,21 @@
+---
+export interface Props {
+    isoColor?: boolean;
+}
+
+const {
+    isoColor = true, // Por defecto es a color
+} = Astro.props
+
+const logoSrc = isoColor 
+    ? '/landing/ingreso-carreras-ucasal-aut/isologo.svg' 
+    : '/landing/ingreso-carreras-ucasal-aut/isologoBlanco.svg';
+---
+
+<div>
+    <img
+        src={logoSrc}
+        class="ucasal-logo w-36"
+        alt="UCASAL LOGO"
+    />
+</div>
