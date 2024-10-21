@@ -2,68 +2,65 @@
 import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Sedes from '../components/Sedes.astro';
+import Beneficios from '../components/Beneficios.astro';
+import Container from '../components/Container.astro';
+import Carreras from '../components/Carreras.jsx';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Carreras de Postgrado - UCASAL">
 	<Navbar/>
 	<HeroSection/>
+	<Container>
+		<Carreras/>
+	</Container>
+	<Beneficios/>
+	<Sedes/>
+	<Footer/>
 </Layout>
-
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
+<style is:global>
+	@font-face {
+	  font-family: "Museo Sans";
+	  font-style: normal;
+	  font-weight: 300;
+	  src: url("/fuentes/MuseoSans_300.otf") format("opentype");
 	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
+  
+	@font-face {
+	  font-family: "Museo Sans";
+	  font-style: normal;
+	  font-weight: 500;
+	  src: url("/fuentes/MuseoSans_500.otf") format("opentype");
 	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
+  
+	@font-face {
+	  font-family: "Museo Sans";
+	  font-style: normal;
+	  font-weight: 700;
+	  src: url("/fuentes/MuseoSans_700.otf") format("opentype");
 	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
+  
+	@font-face {
+	  font-family: "Museo Sans";
+	  font-style: normal;
+	  font-weight: 900;
+	  src: url("/fuentes/MuseoSans_900.otf") format("opentype");
 	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
+	.bigTitle {
+	  display: inline-block;
+	  color: #ee1818;
+	  font-weight: 900;
+	  font-size: 1.5em;
+	  font-family: "Museo Sans";
 	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
+	.neumorphism-component {
+    background-color: #f0f0f0; /* Fondo más claro */
+    border-radius: 0 0 15px 15px; /* Bordes redondeados solo en la parte inferior */
+    box-shadow: 
+    inset 10px 10px 20px #d1d1d1,  /* Sombra interna oscura (ajustada para el nuevo color de fondo) */
+    inset -10px -10px 20px #ffffff, /* Sombra interna clara */
+    10px 10px 20px rgba(0, 0, 0, 0.2), /* Sombra externa oscura */
+    -10px -10px 20px rgba(255, 255, 255, 0.7); /* Sombra externa clara */
 	}
 </style>

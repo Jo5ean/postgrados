@@ -7,16 +7,109 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth scroll-pt-24">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link
+		href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+		rel="stylesheet"/>
+		
+		<script is:inline>
+			// ###### FUNCION ASINCRONA DE CARGA DE LA OFERTA DE CARRERAS ######
+			(async () => {
+		  try {
+			const resp = await fetch(
+			  `https://wwwold.ucasal.edu.ar/landing/consultas/getCarrerasJson.php?tipcar=Grado,Pregrado,Intermedio`,
+        { mode: "no-cors" 
+        });
+			// Verifica si la respuesta es correcta (status 200-299)
+			if (!resp.ok) {
+			  throw new Error(`Network response was not ok: ${resp.statusText}`);
+			}
+	  
+			const data = await resp.json();
+	  
+			// Códigos de carrera que deseas excluir
+			let codigosExcluidos = ["191", "6000", "6001", "6002"];
+			// Filtrar el arreglo data para excluir los códigos de carrera especificados
+			let dataFiltrado = data.filter(
+			  (carrera) => !codigosExcluidos.includes(carrera.codcar)
+			);
+	  
+			// Guardar el listado en almacenamiento local
+			window.localStorage.setItem(
+			  "CarrerasModGeneral",
+			  JSON.stringify(dataFiltrado)
+			);
+		  } catch (error) {
+			// Manejo del error
+			console.error('Fetch error:', error);
+			// Puedes agregar más lógica aquí, como mostrar un mensaje al usuario.
+		  }
+		})();
+		fetch('https://wwwold.ucasal.edu.ar/landing/assets/datosCarreras.json', {
+  mode: "no-cors"
+})
+      .then((response) => response.json())
+      .then((json) => {
+        // Asumiendo que el archivo JSON tiene una clave "promoción" con el texto de la promoción
+        const datosTarjeta = json.tarjeta;
+		console.log(datosTarjeta);
+        const banner = json.banner;
+        const videoURL = json.videoURL;
+        const elementoVideo = document.getElementById('video');
+        const promociones = json.promocion;
+        const elementoPromocion = document.getElementById('promo');
+        let index = 0;
+
+        // Inicializa el contenido de la promoción con el primer mensaje
+        elementoPromocion.innerHTML = promociones[index];
+
+        // Función para cambiar el texto de la promoción cada 3 segundos
+        function cambiarTexto() {
+          index = (index + 1) % promociones.length;
+          elementoPromocion.innerHTML = promociones[index];
+        }
+
+        // Iniciar el intervalo para cambiar el texto
+        setInterval(cambiarTexto, 3000);
+
+        // Actualiza el componente de Tarjeta Macro
+        document.getElementById('tarjetaMacro').innerHTML = `
+                <img class="w-1/2 bg-white rounded-2xl p-4" src="https://www.ucasal.edu.ar/landing/${datosTarjeta.macro.imagen}" alt="tarjeta macro">
+                <p class="text-md">${datosTarjeta.macro.descripcion}</p>
+            `;
+
+        // Actualiza el componente de Tarjeta Naranja
+        document.getElementById('tarjetaNaranja').innerHTML = `
+                <img class="w-1/2 bg-white rounded-2xl p-4" src="https://www.ucasal.edu.ar/landing/${datosTarjeta.naranja.imagen}" alt="tarjeta naranja">
+                <p class="text-md">${datosTarjeta.naranja.descripcion}</p>
+            `;
+
+        // Actualiza el componente de Tarjeta Banco
+        document.getElementById('tarjetaBanco').innerHTML = `
+                <img class="w-1/2 bg-white rounded-2xl p-4" src="https://www.ucasal.edu.ar/landing/${datosTarjeta.banco.imagen}" alt="tarjeta banco">
+                <p class="text-md">${datosTarjeta.banco.descripcion}</p>
+            `;
+
+        // Actualiza el componente banner
+        document.getElementById('banner').innerHTML = `
+                <source src="${banner.video}" type="video/mp4">
+                <source src="${banner.videoOgg}" type="video/ogg">
+            `;
+
+        // Actualiza el elemento de video
+        elementoVideo.setAttribute('src', videoURL);
+      });
+		</script>
 	</head>
 	<body>
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 		<slot />
 	</body>
 </html>

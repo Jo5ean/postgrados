@@ -13,12 +13,12 @@ import Button from "./Button.astro";
         <a href="#" class="flex items-center hover:scale-105" onclick="scrollToTop()">
           <Logo isoColor={true}/>
         </a>
-        <div class="flex md:order-2">
+        <div class="flex lg:order-2">
           <div class="hidden lg:block">
             <Button label="¡Solicitar Admisión!" dir="location.href='https://www.ucasal.edu.ar/carreras/postgrados-form.php'"/>
           </div>
           <button data-collapse-toggle="navbar-sticky" type="button"
-            class="inline-flex items-center pl-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            class="inline-flex items-center pl-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -27,7 +27,7 @@ import Button from "./Button.astro";
             </svg>
           </button>
         </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+        <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
           <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
             <li>
               <div class="block lg:hidden">
